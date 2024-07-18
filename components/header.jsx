@@ -9,7 +9,8 @@ const navItems = [
     { linkText: 'Image CDN', href: '/image-cdn' },
     { linkText: 'Edge Function', href: '/edge' },
     { linkText: 'Blobs', href: '/blobs' },
-    { linkText: 'Classics', href: '/classics' }
+    { linkText: 'Indices', href: '/indices' },
+    { linkText: 'Notes', href: '/notes' }
 ];
 
 export function Header() {
@@ -34,7 +35,7 @@ export function Header() {
             )}
             <div className="flex-grow justify-end hidden lg:flex lg:mr-1">
                 <Link
-                    href="https://github.com/netlify-templates/next-platform-starter"
+                    href="https://github.com/vijay-kumar-singh/next-netlify"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
