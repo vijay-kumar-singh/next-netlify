@@ -4,30 +4,64 @@ import { ContextAlert } from 'components/context-alert';
 import { getNetlifyContext, uploadDisabled } from 'utils';
 
 export const metadata = {
-    title: 'Blobs'
+    title: 'JavaScript'
 };
 
 const explainer = `
-[Netlify Blobs](https://docs.netlify.com/blobs/overview/) provides an object store for any kind of data, be it JSON, binary, 
-or [really](https://mk.gg/projects/chalkstream) anything else ([really!](https://mk.gg/projects/turbofan)). In this example, the blob store is used to **hold the data of user-generated random blobby shapes**.
+The two JavaScript snippets you provided illustrate the difference between the logical OR operator (||) and the nullish coalescing operator (??). Let's break down how each of these works and the implications of their usage.
 
-Using the blob store is basically zero-config. Below is a Next.js Server Action to upload data (see \`app/blobs/actions.js\`). 
-When deployed to Netlify, the Server Action is run by serverless functions, and all context required for the blob service is set-up automatically.
+## Code Snippets
 
-~~~js
-'use server';
-import { getStore } from '@netlify/blobs';
+### Using Logical OR (||)
 
-// TODO: Always be sanitizing data in real sites!
-export async function uploadShape({ shapeData }) {
-    const blobStore = getStore('shapes');
-    const key = data.name;
-    await blobStore.setJSON(key, shapeData);
-}
-~~~
+javascript
+const user = { name: 'John' };
+const name = user.name || 'Guest';
 
-Click "Randomize" to get a shape you like, then hit "Upload".
-Choose any existing object to view it.
+
+### Using Nullish Coalescing (??)
+
+javascript
+const user = { name: 'John' };
+const name = user.name ?? 'Guest';
+
+
+## Differences Explained
+
+### 1. *Behavior with Falsy Values*
+
+- **Logical OR (||): This operator returns the right-hand operand if the left-hand operand is falsy. Falsy values in JavaScript include false, 0, "" (empty string), null, undefined, and NaN. Therefore, if user.name is any of these falsy values, name will be assigned 'Guest'.
+
+  *Example:*
+  javascript
+  ~~~js
+  const user = { name: '' }; // Empty string is falsy
+  const name = user.name || 'Guest'; // name will be 'Guest'
+  ~~~
+  - **Nullish Coalescing (??): This operator only considers null and undefined as "nullish" values. It will return the right-hand operand only if the left-hand operand is null or undefined. Any other value, including falsy values like 0 or "", will be returned as is.
+
+  *Example:*
+  javascript
+  ~~~js
+  const user = { name: '' }; // Empty string is not nullish
+  const name = user.name ?? 'Guest'; // name will be '' (empty string)
+  ~~~
+
+### 2. *Use Cases*
+
+- **Use || when**: You want to provide a default value for any falsy value. This is useful in scenarios where any falsy input should trigger a fallback.
+
+- **Use ?? when**: You want to provide a default value only for null or undefined. This is particularly useful when you want to allow other falsy values (like 0 or "") to be valid.
+
+## Summary
+
+In summary, the key difference between the two snippets lies in how they handle different types of values:
+
+- || will default to 'Guest' for any falsy value.
+- ?? will only default to 'Guest' for null or undefined.
+
+Understanding these differences can help you choose the appropriate operator based on your specific needs in JavaScript programming.
+
 `;
 
 const uploadDisabledText = `
@@ -46,7 +80,7 @@ export default async function Page() {
                         return uploadDisabled ? uploadDisabledText : null;
                     }}
                 />
-                <h1>Blobs x Blobs</h1>
+                <h1>JavaScript logical OR operator (||) and the nullish coalescing operator (??)</h1>
             </section>
             {!!getNetlifyContext() && (
                 <div className="flex flex-col gap-8">
