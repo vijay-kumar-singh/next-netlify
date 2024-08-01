@@ -31,6 +31,11 @@ Reference Link: https://portfoliocharts.com/portfolios/all-seasons-portfolio/
 | Commodities            | 7.5%        | Kotak Commodity Services Fund                       |      |
 |------------------------|-------------|-----------------------------------------------------|------|
 
+Home Decor stock
+<br>
+<li>Asian Paint</li>
+<li>Green panel</li>
+<li>Rushil Decor</li>
 `;
 
 export default async function Page() {
